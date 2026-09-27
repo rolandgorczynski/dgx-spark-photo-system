@@ -56,3 +56,7 @@ auf demselben NVMe ist kein Schutz gegen Geräteausfall. Der erste ML-Auftrag
 kann Modelle aus dem Internet herunterladen; Fotodateien werden dafür nicht an
 einen externen Dienst gesendet. Vor späterem vollständigen Offline-Betrieb
 Modellcache und Updates separat prüfen.
+
+## Ollama-Modelle einstellen
+
+Die Modelle werden in der lokalen `.env` gesetzt: `VISION_MODEL=qwen3.8:27b`. Nach einer Änderung den jeweiligen Container mit `docker compose up -d --no-build --force-recreate quality` neu erstellen. Das Modell muss in Host-Ollama vorhanden sein.

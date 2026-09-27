@@ -17,7 +17,7 @@ services:
     environment:
       QUALITY_PASSWORD: ${QUALITY_PASSWORD}
       QUALITY_CSRF: ${QUALITY_CSRF}
-      VISION_MODEL: qwen3.8:27b
+      VISION_MODEL: ${VISION_MODEL:-qwen3.8:27b}
       OLLAMA_URL: http://host.docker.internal:11434
     security_opt:
       - no-new-privileges:true
