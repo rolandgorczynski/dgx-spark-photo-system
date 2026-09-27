@@ -3,7 +3,7 @@
 Projekt: `/home/jee/docker/photo-system`. Immich v3.2.2 verwaltet die Bibliothek,
 erzeugt lokale ML-Bildindizes und bietet die eingebaute Duplikatprüfung. Die
 zusätzliche Qualitätsoberfläche analysiert die Dateien unter `photos/` lokal und
-kann bis zu drei ähnliche Bilder bei Ollama `qwen3-vl:8b` vergleichen lassen.
+kann bis zu drei ähnliche Bilder bei Ollama `qwen3.8:27b` vergleichen lassen.
 
 ## Start und Zugang
 
@@ -32,7 +32,7 @@ werden nach erneutem Bibliotheks-Scan in Immich sichtbar.
 In Immich unter *Utilities → Review duplicates* die ähnlichen Bilder prüfen.
 Die ML-Komponente verwendet das verfügbare ARM64-Image; das CUDA-Image von
 Immich v3.2.2 hat kein ARM64-Manifest. Die separate Bildbeurteilung verwendet
-Ollama und das vorhandene `qwen3-vl:8b` auf der Spark.
+Ollama und das vorhandene `qwen3.8:27b` auf der Spark.
 
 ## Qualitätsprüfung
 

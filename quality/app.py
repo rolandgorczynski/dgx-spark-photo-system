@@ -20,7 +20,7 @@ DB = Path('/state/quality.sqlite3')
 PASSWORD = os.environ['QUALITY_PASSWORD']
 CSRF = os.environ['QUALITY_CSRF']
 OLLAMA = os.getenv('OLLAMA_URL', 'http://host.docker.internal:11434')
-MODEL = os.getenv('VISION_MODEL', 'qwen3-vl:8b')
+MODEL = os.getenv('VISION_MODEL', 'qwen3.8:27b')
 EXTS = {'.jpg', '.jpeg', '.png', '.webp', '.tif', '.tiff', '.bmp', '.gif', '.heic', '.heif'}
 lock = threading.Lock()
 status = {'running': False, 'processed': 0, 'total': 0, 'error': ''}
@@ -277,12 +277,12 @@ def vision():
                 image.save(out, 'JPEG', quality=82)
                 encoded.append(base64.b64encode(out.getvalue()).decode())
         response = requests.post(f'{OLLAMA}/api/generate', json={
-            'model': MODEL, 'stream': False, 'images': encoded,
-            'options': {'num_ctx': 4096}, 'keep_alive': 0,
+            'model': MODEL, 'stream': False, 'think': False, 'images': encoded,
+            'options': {'num_ctx': 8192, 'num_predict': 1500, 'temperature': 0}, 'keep_alive': '2m',
             'prompt': 'Vergleiche diese Bilder in ihrer Reihenfolge. Sind sie dieselbe Szene? Beurteile nur sichtbare Schärfe, Belichtung und Bildinhalt. Nenne Unsicherheiten. Empfiehl höchstens eine Datei zur manuellen Prüfung, keine automatische Löschung.'
         }, timeout=180)
         response.raise_for_status()
-        answer = response.json().get('response', 'Keine Antwort')
+        answer = response.json().get('response', '').strip() or 'Modell lieferte keine Antwort'
     except (OSError, ValueError, requests.RequestException) as exc:
         answer = f'Lokales Modell nicht erreichbar: {exc}'
     from markupsafe import escape
