@@ -1,0 +1,5 @@
+Flask==3.1.1
+gunicorn==23.0.0
+Pillow==11.3.0
+ImageHash==4.3.2
+requests==2.32.4

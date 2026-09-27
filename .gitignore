@@ -1,0 +1,8 @@
+.env
+library/
+photos/
+postgres/
+quarantine/
+state/
+__pycache__/
+*.pyc
